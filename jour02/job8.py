@@ -4,6 +4,7 @@ from datetime import datetime
 import mysql.connector
 
 
+# fonction séparé pour connection
 def connect():
     laplateforme = mysql.connector.connect(
         host="localhost",
@@ -14,6 +15,14 @@ def connect():
     return laplateforme
 
 
+# Je n'ai pas fait de classes comme dans le job 7 car on a pas besoin
+# de gérer les attributs d'objets.
+
+# Personellement j'aurais préféré mettre les fonctions dans des fichiers
+# séparé afin de réduire le nombre de ligne par fichier et rendre le code
+# plus facile à comprendre.
+
+# FONCTIONS POUR CAGES
 def create_cage(superficie, capacite):
     if not isinstance(superficie, int):
         print("La superficie doit être un integer")
@@ -28,6 +37,8 @@ def create_cage(superficie, capacite):
 
     cursor.execute("SELECT id FROM cage")
     cages = cursor.fetchall()
+
+    # Pour reset l'auto-incrémentation, pour empêcher skips
     if len(cages) == 0:
         increment_start = 1
     else:
@@ -143,6 +154,7 @@ def delete_cage(cage_id):
     laplateforme.close()
 
 
+# FONCTIONS DE "MENUS" POUR CAGES
 def create_cage_menu():
     while True:
         superficie = input("Quelle est la superficie?\n")
@@ -272,6 +284,7 @@ def cages_menu():
             print("Choix invalide")
 
 
+# FONCTIONS POUR ANIMAUX
 def valid_date(input_string):
     if len(input_string) != 10:
         return False
@@ -371,6 +384,7 @@ def delete_animal(animal_id):
     laplateforme.close()
 
 
+# FONCTIONS MENUS ANIMAUX
 def create_animal_menu():
     while True:
         nom = input("Quel est le nom de l'animal?\n")
