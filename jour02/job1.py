@@ -1,6 +1,7 @@
 import mysql.connector
 
 
+# Connection à base de données
 laplateforme = mysql.connector.connect(
     host="localhost",
     user="root",
@@ -8,6 +9,7 @@ laplateforme = mysql.connector.connect(
     database="laplateforme"
 )
 
+# Curseur pour intéragir avec la base de données
 cursor = laplateforme.cursor(buffered=True)
 cursor.execute("SELECT * FROM etudiant")
 etudiant = cursor.fetchall()
