@@ -10,8 +10,9 @@ laplateforme = mysql.connector.connect(
 cursor = laplateforme.cursor(buffered=True)
 cursor.execute("SELECT * FROM etudiant")
 etudiant = cursor.fetchall()
-for person in etudiant:
-    print(person)
 cursor.close()
 
 laplateforme.close()
+
+for person in etudiant:
+    print(person)
