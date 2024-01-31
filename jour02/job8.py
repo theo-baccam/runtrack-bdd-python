@@ -92,6 +92,22 @@ def read_cages():
     laplateforme.close()
 
 
+def get_total_area():
+    laplateforme = connect()
+
+    cursor = laplateforme.cursor()
+    cursor.execute("SELECT superficie from cage")
+    superficies = cursor.fetchall()
+    area_list = []
+    for superficie in superficies:
+        area_list.append(superficie[0])
+    total = sum(area_list)
+    print(f"La superficie totale des cages est {total}m2")
+    cursor.close()
+
+    laplateforme.close()
+
+
 def update_cage(cage_id, value_name, new_value):
     if not isinstance(cage_id, int):
         print("L'identifiant de lage doit être un integer")
@@ -233,8 +249,9 @@ def cages_menu():
     options = {
         "1": create_cage_menu,
         "2": read_cages,
-        "3": update_cage_menu,
-        "4": delete_cage_menu,
+        "3": get_total_area,
+        "4": update_cage_menu,
+        "5": delete_cage_menu,
     }
 
     while True:
@@ -242,11 +259,12 @@ def cages_menu():
             "Que souhaitez vous faire?\n"
             "1) Ajouter une nouvelle cage\n"
             "2) Afficher les cages\n"
-            "3) Mettre à jour les infos d'une cage\n"
-            "4) Supprimer une cage\n"
-            "5) Je veux revenir en arrière\n"
+            "3) Afficher la superficie totale des cages\n"
+            "4) Mettre à jour les infos d'une cage\n"
+            "5) Supprimer une cage\n"
+            "6) Je veux revenir en arrière\n"
         )
-        if choice == "5":
+        if choice == "6":
             break
         elif choice in options:
             options[choice]()
