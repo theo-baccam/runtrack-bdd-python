@@ -106,6 +106,7 @@ class Employe:
         cursor.close()
         laplateforme.close()
 
+
 employe = Employe()
 employe.create("Doe", "Jane", 3800.72, 2)
 employe.read()
