@@ -48,6 +48,29 @@ def create_cage(superficie, capacite):
     laplateforme.close()
 
 
+def get_animal_in_cage(id_cage):
+    if not isinstance(id_cage, int):
+        print("L'ID de la cage doit être un integer")
+    laplateforme = connect()
+
+    cursor = laplateforme.cursor()
+    cursor.execute("SELECT id_cage, nom, race FROM animal")
+    animals = cursor.fetchall()
+    animal_in_cage = []
+    for animal in animals:
+        if animal[0] == id_cage:
+            animal_dict = {
+                "id_cage": animal[0],
+                "nom": animal[1],
+                "race": animal[2]
+            }
+            animal_in_cage.append(animal_dict)
+    cursor.close()
+
+    laplateforme.close()
+    return animal_in_cage
+
+
 def read_cages():
     laplateforme = connect()
 
@@ -59,8 +82,10 @@ def read_cages():
             f"CAGE N°{cage[0]}:\n"
             f" - Superficie: {cage[1]}\n"
             f" - Capacité: {cage[2]}\n"
-            f""
+            f" - Animaux:\n"
         )
+        for animal in get_animal_in_cage(cage[0]):
+            output += f"   - {animal["nom"]} ({animal["race"]})"
         print(output)
     cursor.close()
 
