@@ -1,5 +1,6 @@
 import mysql.connector
 
+
 laplateforme = mysql.connector.connect(
     host="localhost",
     user="root",
@@ -10,7 +11,8 @@ laplateforme = mysql.connector.connect(
 cursor = laplateforme.cursor(buffered=True)
 cursor.execute("SELECT nom, capacite FROM salle")
 salle = cursor.fetchall()
-print(salle)
 cursor.close()
 
 laplateforme.close()
+
+print(salle)

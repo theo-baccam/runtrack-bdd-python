@@ -1,5 +1,6 @@
 import mysql.connector
 
+
 laplateforme = mysql.connector.connect(
     host="localhost",
     user="root",
