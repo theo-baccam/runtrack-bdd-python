@@ -1,5 +1,6 @@
 import mysql.connector
 
+
 laplateforme = mysql.connector.connect(
     host="localhost",
     user="root",
@@ -31,7 +32,7 @@ cursor.close()
 laplateforme.close()
 
 
-class Salarie:
+class Employe:
     def open_connection(self):
         laplateforme = mysql.connector.connect(
             host="localhost",
@@ -101,10 +102,10 @@ class Salarie:
         cursor.close()
         laplateforme.close()
 
-salarie = Salarie()
-salarie.create("Doe", "Jane", 3800.72, 2)
-salarie.read()
-salarie.update(5, "salaire", 3900.29)
-salarie.read()
-salarie.delete(5)
-salarie.read()
+employe = Employe()
+employe.create("Doe", "Jane", 3800.72, 2)
+employe.read()
+employe.update(5, "salaire", 3900.29)
+employe.read()
+employe.delete(5)
+employe.read()
