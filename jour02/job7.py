@@ -9,16 +9,24 @@ laplateforme = mysql.connector.connect(
 )
 
 cursor = laplateforme.cursor(buffered=True)
+
 cursor.execute("SELECT * FROM employe WHERE salaire > 3000")
-employes = cursor.fetchall()
-for employe in employes:
-    print(employe)
+employes_high_salary = cursor.fetchall()
 
 cursor.execute("SELECT nom, prenom, id_service FROM employe")
 employes = cursor.fetchall()
-print(employes)
+
 cursor.execute("SELECT * FROM service")
 services = cursor.fetchall()
+
+cursor.close()
+laplateforme.close()
+
+for employe in employes_high_salary:
+    print(employe)
+
+print(employes)
+
 print(services)
 for employe in employes:
     string = (
@@ -26,10 +34,6 @@ for employe in employes:
         f"{services[employe[2] - 1][1]}"
         )
     print(string)
-
-cursor.close()
-
-laplateforme.close()
 
 
 class Employe:
